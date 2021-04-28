@@ -1,0 +1,39 @@
+baseURL = "https://owensresearch.org"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+title = "Owens Research"
+theme = "hermit"
+
+[author]
+  name = "Justin Owens"
+
+
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
+  homeSubtitle = "Networking, Infrastructure, & Cyber Security Enthusiast"
+  code_copy_button = true # Turn on/off the code-copy-button for code-fields
+
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/owensresearch"
+
+[menu]
+  [[menu.main]]
+   name = "Projects"
+   url = "projects/"
+   weight = 1
+  [[menu.main]]
+   name = "DN42 Peering"
+   url = "dn42-peering/"
+   weight = 2
+  [[menu.main]]
+   name = "DN42 Services"
+   url = "dn42-services/"
+   weight = 3
+  [[menu.main]]
+   name = "Blog"
+   url = "posts/"
+   weight = 4

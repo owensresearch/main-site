@@ -1,0 +1,202 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on Owens Research</title>
+		<link>https://owensresearch.org/posts/</link>
+		<description>Recent content in Posts on Owens Research</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<lastBuildDate>Tue, 05 Jan 2021 00:00:00 +0000</lastBuildDate>
+		<atom:link href="https://owensresearch.org/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>VMware Notes</title>
+			<link>https://owensresearch.org/posts/vmware-fw/</link>
+			<pubDate>Tue, 05 Jan 2021 00:00:00 +0000</pubDate>
+			
+			<guid>https://owensresearch.org/posts/vmware-fw/</guid>
+			<description>Adding Custom Ports to ESXi Host Firewall This post covers adding a custom syslog port but the concept can be applied for other needed firewall changes. By default syslog uses UDP port 514. However, most syslog servers and clients can easily be configured to use different ports. Because ports 0-1024 are system ports that sometimes require escalated rights to bind to, the most simple solution could be to use a custom port for syslog.</description>
+			<content type="html"><![CDATA[<h1 id="adding-custom-ports-to-esxi-host-firewall">Adding Custom Ports to ESXi Host Firewall</h1>
+<p>This post covers adding a custom syslog port but the concept can be applied for other needed firewall changes.  By default syslog uses UDP port 514.  However, most syslog servers and clients can easily be configured to use different ports.  Because ports 0-1024 are system ports that sometimes require escalated rights to bind to, the most simple solution could be to use a custom port for syslog.  The ESXi firewall by default allows common ports outbound such as 514, but probably will not allow a custom port.  This post was written using ESXi 6.7U3.</p>
+<h2 id="checking-current-firewall-configuration">Checking Current Firewall Configuration</h2>
+<p>Before changing anything, lets take a quick look at the current configuration.</p>
+<ol>
+<li>Launch and login to vCenter.</li>
+<li>Navigate to <strong>Host and Clusters</strong>.</li>
+<li>Highlight the host in question within your datacenter.</li>
+<li>Select <strong>Configure</strong> -&gt; <strong>Firewall</strong>.</li>
+</ol>
+<h2 id="create-custom-firewall-rule">Create Custom Firewall Rule</h2>
+<ol>
+<li>SSH the ESXi host.</li>
+<li>Navigate to the firewall directory.
+<code>cd /etc/vmware/firewall</code></li>
+<li>Create and edit a new file for the custom rule.
+<code>vi syslog-custom.xml</code></li>
+<li>Below is an example of what the finished syslog-custom.xml should look like when done.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;ConfigRoot&gt;</span>
+  <span style="color:#f92672">&lt;service&gt;</span>
+    <span style="color:#f92672">&lt;id&gt;</span>syslog-custom<span style="color:#f92672">&lt;/id&gt;</span>
+    <span style="color:#f92672">&lt;rule</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#39;0000&#39;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;direction&gt;</span>outbound<span style="color:#f92672">&lt;/direction&gt;</span>
+      <span style="color:#f92672">&lt;protocol&gt;</span>udp<span style="color:#f92672">&lt;/protocol&gt;</span>
+      <span style="color:#f92672">&lt;porttype&gt;</span>dst<span style="color:#f92672">&lt;/porttype&gt;</span>
+      <span style="color:#f92672">&lt;port&gt;</span>5514<span style="color:#f92672">&lt;/port&gt;</span>
+    <span style="color:#f92672">&lt;/rule&gt;</span>
+    <span style="color:#f92672">&lt;enabled&gt;</span>false<span style="color:#f92672">&lt;/enabled&gt;</span>
+    <span style="color:#f92672">&lt;required&gt;</span>false<span style="color:#f92672">&lt;/required&gt;</span>
+  <span style="color:#f92672">&lt;/service&gt;</span>
+<span style="color:#f92672">&lt;/ConfigRoot&gt;</span>
+</code></pre></div><h2 id="reload-firewall">Reload Firewall</h2>
+<ol>
+<li><code>esxcli network firewall unload</code></li>
+<li><code>esxcli network firewall load</code></li>
+</ol>
+<h2 id="enable-syslog-on-custom-port">Enable Syslog on Custom Port</h2>
+<ol>
+<li><code>esxcli network firewall ruleset set  -e true -r syslog-custom</code></li>
+</ol>
+<blockquote>
+<p>I want to credit &ldquo;dnozay&rdquo; on GitHub for his awesome repo explaining this.  Please give his repo a look <a href="https://gist.github.com/dnozay/9352804">here</a> for a few more CLI examples that will help you get remote syslog setup.</p>
+</blockquote>
+<h1 id="nsx-t-notes">NSX-T Notes</h1>
+<p><code>esxcfg-nics -l</code>  - shows mtu of physical adapters</p>
+<p><code>nsxdp-cli vswitch instance list</code> - list nsx backed logical switches</p>
+<p><code>nsxdp-cli vswitch mtu get -dvs switchname</code>  - list mtu of nsx switch</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Linux Notes</title>
+			<link>https://owensresearch.org/posts/linux/</link>
+			<pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
+			
+			<guid>https://owensresearch.org/posts/linux/</guid>
+			<description>SSH Key Based Login Setup SSH Keys  Use PuttyGen to generate public/private key pair. Copy the OpenSSH Public Key from the PuttyGen window (the save public key will not export in correct format). Paste the Public key into the file ~/home/.ssh/authorized_keys Export Private Key using the save button within PuttyGen (we need the .ppk file). Attach this Private Key to Putty.exe under Auth. Make sure you&amp;rsquo;re using username@x.x.x.x as the SSH target.</description>
+			<content type="html"><![CDATA[<h1 id="ssh-key-based-login">SSH Key Based Login</h1>
+<h2 id="setup-ssh-keys">Setup SSH Keys</h2>
+<ol>
+<li>Use PuttyGen to generate public/private key pair.</li>
+<li>Copy the OpenSSH Public Key from the PuttyGen window (the save public key will not export in correct format).</li>
+<li>Paste the Public key into the file ~/home/.ssh/authorized_keys</li>
+<li>Export Private Key using the save button within PuttyGen (we need the .ppk file).</li>
+<li>Attach this Private Key to Putty.exe under Auth.</li>
+<li>Make sure you&rsquo;re using <a href="mailto:username@x.x.x.x">username@x.x.x.x</a> as the SSH target.</li>
+</ol>
+<h2 id="disable-sudo-password">Disable Sudo Password</h2>
+<p><code>sudo visudo -f /etc/sudoers</code><br>
+Add <code>username ALL=(ALL) NOPASSWD:ALL</code> to bottom of file replacing username with the user in question.</p>
+<h1 id="change-repo">Change Repo</h1>
+<p><code>/etc/apt/sources.list</code></p>
+<h3 id="default-debian-10-buster-sources">Default Debian 10 Buster Sources</h3>
+<pre><code>deb http://deb.debian.org/debian buster main
+deb-src http://deb.debian.org/debian buster main
+
+deb http://deb.debian.org/debian-security/ buster/updates main
+deb-src http://deb.debian.org/debian-security/ buster/updates main
+
+deb http://deb.debian.org/debian buster-updates main
+deb-src http://deb.debian.org/debian buster-updates main
+</code></pre><blockquote>
+<p><em>Don&rsquo;t forget <code>apt update</code> after making changes..</em>
+{.is-info}</p>
+</blockquote>
+<p><a href="https://wiki.debian.org/SourcesList">https://wiki.debian.org/SourcesList</a></p>
+<h1 id="linux-single-user-mode">Linux Single User Mode</h1>
+<h2 id="grub">GRUB</h2>
+<ol>
+<li>Press &ldquo;e&rdquo; to modify GRUB.</li>
+<li>Add <code>single init=/bin/bash</code> at end of linux line.</li>
+<li>Mount filesystem with <code>mount -rw -o remount /</code></li>
+</ol>
+<h2 id="bring-network-up">Bring Network Up</h2>
+<pre><code>ifconfig eth0 xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.x up
+
+route add default gw xxx.xxx.xxx.x
+
+ip route list
+</code></pre>]]></content>
+		</item>
+		
+		<item>
+			<title>PiHole w/ DoH</title>
+			<link>https://owensresearch.org/posts/pihole-doh/</link>
+			<pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://owensresearch.org/posts/pihole-doh/</guid>
+			<description>Creating a PiHole VM w/ DoH to Cloudflare This is a brief guide on creating a new PiHole server that resolves DNS via Cloudflare over HTTPS. It is assumed that the audience already has a working knowledge of their vender specific network equipment and virtualization platform in addition to some experience with Ubuntu Linux.
+Prep Work  Automatic Updates
+The entire reason I am building a PiHole server today is because I used a development copy of Ubuntu for the last one and I didn’t utilize automatic updates.</description>
+			<content type="html"><![CDATA[<h1 id="creating-a-pihole-vm-w-doh-to-cloudflare">Creating a PiHole VM w/ DoH to Cloudflare</h1>
+<p>This is a brief guide on creating a new PiHole server that resolves DNS via Cloudflare over HTTPS.  It is assumed that the audience already has a working knowledge of their vender specific network equipment and virtualization platform in addition to some experience with Ubuntu Linux.</p>
+<h1 id="prep-work">Prep Work</h1>
+<blockquote>
+<p><strong>Automatic Updates</strong><br>
+The entire reason I am building a PiHole server today is because I used a development copy of Ubuntu for the last one and I didn’t utilize automatic updates.  I set it up and forgot about it until one day I was no longer able to update PiHole and the Web UI essentially broke.  At the time of this post, 20.04 LTS is available with support until April 2025.  It is recommended to use a release such as this and enable automatic updates.</p>
+</blockquote>
+<ol>
+<li>Deploy a new LTS Ubuntu image.</li>
+<li>Establish network connectivity; 1.1.1.1 can be used for DNS for now.</li>
+<li><code>sudo apt update</code> and <code>sudo apt upgrade</code></li>
+<li><code>sudo apt install unattended-upgrades</code></li>
+<li><code>sudo nano /etc/apt/apt.conf.d/50unattended-upgrades</code></li>
+<li>Remove the <code>//</code> before <code>&quot;${distro_id}:${distro_codename}-updates&quot;;</code></li>
+<li><code>sudo nano /etc/apt/apt.conf.d/20auto-upgrades</code> and copy the below example:</li>
+</ol>
+<pre><code>APT::Periodic::Update-Package-Lists &quot;1&quot;;  
+APT::Periodic::Download-Upgradeable-Packages &quot;1&quot;;  
+APT::Periodic::AutocleanInterval &quot;7&quot;;  
+APT::Periodic::Unattended-Upgrade &quot;1&quot;;  
+</code></pre><ol start="8">
+<li><code>sudo reboot</code> to give a fresh start before getting into PiHole install.</li>
+</ol>
+<blockquote>
+<p>More info on enabling automatic updates can be found here <a href="https://libre-software.net/ubuntu-automatic-updates/">https://libre-software.net/ubuntu-automatic-updates/</a></p>
+</blockquote>
+<h1 id="install-pihole">Install PiHole</h1>
+<ul>
+<li>Here is a link to PiHole&rsquo;s github page <a href="https://github.com/pi-hole/pi-hole/#one-step-automated-install">https://github.com/pi-hole/pi-hole/#one-step-automated-install</a></li>
+<li>Assuming you trust them and/or me you can use this script <code>curl -sSL https://install.pi-hole.net | bash</code></li>
+<li>Follow the prompts on your Ubuntu server.  As before, for now we can just select Cloudflare as our upstream DNS.  The defaults for everything should be fine.</li>
+</ul>
+<h2 id="create-cron-job-to-automatically-update-pihole-package">Create Cron Job to Automatically Update PiHole Package</h2>
+<ol>
+<li><code>sudo apt install cron</code> and <code>sudo systemctl enable cron</code></li>
+<li><code>sudo crontab -e</code></li>
+<li>Add <code>0 3 * * * sudo pihole -up</code> to the bottom of the file.</li>
+</ol>
+<ul>
+<li>PiHole will now update every morning at 3AM.</li>
+</ul>
+<h1 id="install-cloudflare-doh-daemon">Install Cloudflare DoH Daemon</h1>
+<ol>
+<li>Follow this guide <a href="https://docs.pi-hole.net/guides/dns-over-https/">https://docs.pi-hole.net/guides/dns-over-https/</a></li>
+<li>Recommend to use the Manual Way.</li>
+</ol>
+<h2 id="update-cron-for-cloudflare-daemon">Update Cron for Cloudflare Daemon</h2>
+<p><code>0 3 * * 0 sudo cloudflared update</code><br>
+<code>0 3 * * 0 sudo systemctl restart cloudflared</code></p>
+<ul>
+<li>This updates cloudflared at 3AM every Sunday.</li>
+</ul>
+]]></content>
+		</item>
+		
+		<item>
+			<title>pfSense Notes</title>
+			<link>https://owensresearch.org/posts/pfsense/</link>
+			<pubDate>Fri, 29 May 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://owensresearch.org/posts/pfsense/</guid>
+			<description>MTU on LAGG If you have a LAGG to pfSense then chances are this is your trunk with all your vlans. Often there may be a situation when one of those vlan interfaces needs to have upgraded MTU size. Unlike other standalone interfaces, any LAGG members cannot change their MTU in the interfaces assignment area.
+Several posts from a few years back suggest it was a pretty big issue for awhile.</description>
+			<content type="html"><![CDATA[<h2 id="mtu-on-lagg">MTU on LAGG</h2>
+<p>If you have a LAGG to pfSense then chances are this is your trunk with all your vlans.  Often there may be a situation when one of those vlan interfaces needs to have upgraded MTU size.  Unlike other standalone interfaces, any LAGG members cannot change their MTU in the interfaces assignment area.</p>
+<p>Several posts from a few years back suggest it was a pretty big issue for awhile.  Some suggest to manually assign the LAGG an interface and change the MTU there.  DO NOT do this; you will bring down the network.  Atleast on version 2.4.5 and newer the below command is what you need.</p>
+<p><code>ifconfig lagg0 mtu 9000</code></p>
+<p>A reboot when possible would be ideal.</p>
+]]></content>
+		</item>
+		
+	</channel>
+</rss>

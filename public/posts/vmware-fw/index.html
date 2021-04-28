@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="VMware Notes">
+<meta itemprop="description" content="Adding Custom Ports to ESXi Host Firewall This post covers adding a custom syslog port but the concept can be applied for other needed firewall changes. By default syslog uses UDP port 514. However, most syslog servers and clients can easily be configured to use different ports. Because ports 0-1024 are system ports that sometimes require escalated rights to bind to, the most simple solution could be to use a custom port for syslog."><meta itemprop="datePublished" content="2021-01-05T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2021-01-05T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="284">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="VMware Notes" />
+<meta property="og:description" content="Adding Custom Ports to ESXi Host Firewall This post covers adding a custom syslog port but the concept can be applied for other needed firewall changes. By default syslog uses UDP port 514. However, most syslog servers and clients can easily be configured to use different ports. Because ports 0-1024 are system ports that sometimes require escalated rights to bind to, the most simple solution could be to use a custom port for syslog." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://owensresearch.org/posts/vmware-fw/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-01-05T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-01-05T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="VMware Notes"/>
+<meta name="twitter:description" content="Adding Custom Ports to ESXi Host Firewall This post covers adding a custom syslog port but the concept can be applied for other needed firewall changes. By default syslog uses UDP port 514. However, most syslog servers and clients can easily be configured to use different ports. Because ports 0-1024 are system ports that sometimes require escalated rights to bind to, the most simple solution could be to use a custom port for syslog."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>VMware Notes</title>
+	<link rel="stylesheet" href="https://owensresearch.org/css/style.min.f74778e3020c87c304fb5982e09b92ba63a5c7f202996d4c7283d6057acfe9c1.css" integrity="sha256-90d44wIMh8ME+1mC4JuSumOlx/ICmW1McoPWBXrP6cE=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://owensresearch.org">Owens Research</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://owensresearch.org/projects/">Projects</a>
+				<a href="https://owensresearch.org/dn42-peering/">DN42 Peering</a>
+				<a href="https://owensresearch.org/dn42-services/">DN42 Services</a>
+				<a href="https://owensresearch.org/posts/">Blog</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/owensresearch" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://owensresearch.org/projects/">Projects</a></li>
+			<li><a href="https://owensresearch.org/dn42-peering/">DN42 Peering</a></li>
+			<li><a href="https://owensresearch.org/dn42-services/">DN42 Services</a></li>
+			<li><a href="https://owensresearch.org/posts/">Blog</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jan 5, 2021</span></div>
+				<h1>VMware Notes</h1>
+			</header>
+			<div class="content">
+				<h1 id="adding-custom-ports-to-esxi-host-firewall">Adding Custom Ports to ESXi Host Firewall<a href="#adding-custom-ports-to-esxi-host-firewall" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>This post covers adding a custom syslog port but the concept can be applied for other needed firewall changes.  By default syslog uses UDP port 514.  However, most syslog servers and clients can easily be configured to use different ports.  Because ports 0-1024 are system ports that sometimes require escalated rights to bind to, the most simple solution could be to use a custom port for syslog.  The ESXi firewall by default allows common ports outbound such as 514, but probably will not allow a custom port.  This post was written using ESXi 6.7U3.</p>
+<h2 id="checking-current-firewall-configuration">Checking Current Firewall Configuration<a href="#checking-current-firewall-configuration" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>Before changing anything, lets take a quick look at the current configuration.</p>
+<ol>
+<li>Launch and login to vCenter.</li>
+<li>Navigate to <strong>Host and Clusters</strong>.</li>
+<li>Highlight the host in question within your datacenter.</li>
+<li>Select <strong>Configure</strong> -&gt; <strong>Firewall</strong>.</li>
+</ol>
+<h2 id="create-custom-firewall-rule">Create Custom Firewall Rule<a href="#create-custom-firewall-rule" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ol>
+<li>SSH the ESXi host.</li>
+<li>Navigate to the firewall directory.
+<code>cd /etc/vmware/firewall</code></li>
+<li>Create and edit a new file for the custom rule.
+<code>vi syslog-custom.xml</code></li>
+<li>Below is an example of what the finished syslog-custom.xml should look like when done.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;ConfigRoot&gt;</span>
+  <span style="color:#f92672">&lt;service&gt;</span>
+    <span style="color:#f92672">&lt;id&gt;</span>syslog-custom<span style="color:#f92672">&lt;/id&gt;</span>
+    <span style="color:#f92672">&lt;rule</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#39;0000&#39;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;direction&gt;</span>outbound<span style="color:#f92672">&lt;/direction&gt;</span>
+      <span style="color:#f92672">&lt;protocol&gt;</span>udp<span style="color:#f92672">&lt;/protocol&gt;</span>
+      <span style="color:#f92672">&lt;porttype&gt;</span>dst<span style="color:#f92672">&lt;/porttype&gt;</span>
+      <span style="color:#f92672">&lt;port&gt;</span>5514<span style="color:#f92672">&lt;/port&gt;</span>
+    <span style="color:#f92672">&lt;/rule&gt;</span>
+    <span style="color:#f92672">&lt;enabled&gt;</span>false<span style="color:#f92672">&lt;/enabled&gt;</span>
+    <span style="color:#f92672">&lt;required&gt;</span>false<span style="color:#f92672">&lt;/required&gt;</span>
+  <span style="color:#f92672">&lt;/service&gt;</span>
+<span style="color:#f92672">&lt;/ConfigRoot&gt;</span>
+</code></pre></div><h2 id="reload-firewall">Reload Firewall<a href="#reload-firewall" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ol>
+<li><code>esxcli network firewall unload</code></li>
+<li><code>esxcli network firewall load</code></li>
+</ol>
+<h2 id="enable-syslog-on-custom-port">Enable Syslog on Custom Port<a href="#enable-syslog-on-custom-port" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ol>
+<li><code>esxcli network firewall ruleset set  -e true -r syslog-custom</code></li>
+</ol>
+<blockquote>
+<p>I want to credit &ldquo;dnozay&rdquo; on GitHub for his awesome repo explaining this.  Please give his repo a look <a href="https://gist.github.com/dnozay/9352804">here</a> for a few more CLI examples that will help you get remote syslog setup.</p>
+</blockquote>
+<h1 id="nsx-t-notes">NSX-T Notes<a href="#nsx-t-notes" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p><code>esxcfg-nics -l</code>  - shows mtu of physical adapters</p>
+<p><code>nsxdp-cli vswitch instance list</code> - list nsx backed logical switches</p>
+<p><code>nsxdp-cli vswitch mtu get -dvs switchname</code>  - list mtu of nsx switch</p>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Justin Owens</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>284 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-01-04 19:00 -0500</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://owensresearch.org/posts/linux/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Linux Notes</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2021 <a href="https://owensresearch.org">Justin Owens</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://owensresearch.org/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://owensresearch.org/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

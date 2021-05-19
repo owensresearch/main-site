@@ -23,6 +23,6 @@ Public: [lg.owensresearch.org](https://lg.owensresearch.org)
 
 # Uptime Status
 
-- [stats.owensresearch.org](https://stats.owensresearch.org)  
+- [https://stats.uptimerobot.com/ZmDnZfM81m](https://stats.uptimerobot.com/ZmDnZfM81m)  
 
 This page shows the status of all my DN42 nodes as well as some other projects.  

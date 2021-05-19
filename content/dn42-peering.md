@@ -57,8 +57,7 @@ date: 2021-04-27T20:00:36-04:00
 
 # Communities
 
- - Routes originating from AS4242421099 are tagged with the regional origin community value as documented on the DN42 Wiki. [https://dn42.wiki/howto/Bird-communities](https://dn42.wiki/howto/Bird-communities) *(see below)*
-
+ - Routes originating from AS4242421099 are tagged with the regional origin community value as documented on the DN42 Wiki. [https://dn42.wiki/howto/Bird-communities](https://dn42.wiki/howto/Bird-communities)
 
 
 ## Large Communities
@@ -75,4 +74,4 @@ date: 2021-04-27T20:00:36-04:00
 ----
 
 
-> **Page Updated: Apr. 27, 2021**
+> **Page Updated: May. 17, 2021**

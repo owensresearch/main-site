@@ -34,7 +34,7 @@
 <code>vi syslog-custom.xml</code></li>
 <li>Below is an example of what the finished syslog-custom.xml should look like when done.</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;ConfigRoot&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;ConfigRoot&gt;</span>
   <span style="color:#f92672">&lt;service&gt;</span>
     <span style="color:#f92672">&lt;id&gt;</span>syslog-custom<span style="color:#f92672">&lt;/id&gt;</span>
     <span style="color:#f92672">&lt;rule</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#39;0000&#39;</span><span style="color:#f92672">&gt;</span>
@@ -89,7 +89,7 @@ Add <code>username ALL=(ALL) NOPASSWD:ALL</code> to bottom of file replacing use
 <h1 id="change-repo">Change Repo</h1>
 <p><code>/etc/apt/sources.list</code></p>
 <h3 id="default-debian-10-buster-sources">Default Debian 10 Buster Sources</h3>
-<pre><code>deb http://deb.debian.org/debian buster main
+<pre tabindex="0"><code>deb http://deb.debian.org/debian buster main
 deb-src http://deb.debian.org/debian buster main
 
 deb http://deb.debian.org/debian-security/ buster/updates main
@@ -110,7 +110,7 @@ deb-src http://deb.debian.org/debian buster-updates main
 <li>Mount filesystem with <code>mount -rw -o remount /</code></li>
 </ol>
 <h2 id="bring-network-up">Bring Network Up</h2>
-<pre><code>ifconfig eth0 xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.x up
+<pre tabindex="0"><code>ifconfig eth0 xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.x up
 
 route add default gw xxx.xxx.xxx.x
 
@@ -143,7 +143,7 @@ The entire reason I am building a PiHole server today is because I used a develo
 <li>Remove the <code>//</code> before <code>&quot;${distro_id}:${distro_codename}-updates&quot;;</code></li>
 <li><code>sudo nano /etc/apt/apt.conf.d/20auto-upgrades</code> and copy the below example:</li>
 </ol>
-<pre><code>APT::Periodic::Update-Package-Lists &quot;1&quot;;  
+<pre tabindex="0"><code>APT::Periodic::Update-Package-Lists &quot;1&quot;;  
 APT::Periodic::Download-Upgradeable-Packages &quot;1&quot;;  
 APT::Periodic::AutocleanInterval &quot;7&quot;;  
 APT::Periodic::Unattended-Upgrade &quot;1&quot;;  

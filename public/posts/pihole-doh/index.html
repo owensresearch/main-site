@@ -8,8 +8,8 @@
 <meta itemprop="name" content="PiHole w/ DoH">
 <meta itemprop="description" content="Creating a PiHole VM w/ DoH to Cloudflare This is a brief guide on creating a new PiHole server that resolves DNS via Cloudflare over HTTPS. It is assumed that the audience already has a working knowledge of their vender specific network equipment and virtualization platform in addition to some experience with Ubuntu Linux.
 Prep Work  Automatic Updates
-The entire reason I am building a PiHole server today is because I used a development copy of Ubuntu for the last one and I didn’t utilize automatic updates."><meta itemprop="datePublished" content="2020-06-18T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-06-18T00:00:00&#43;00:00" />
+The entire reason I am building a PiHole server today is because I used a development copy of Ubuntu for the last one and I didn’t utilize automatic updates."><meta itemprop="datePublished" content="2020-06-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-06-18T00:00:00+00:00" />
 <meta itemprop="wordCount" content="356">
 <meta itemprop="keywords" content="" /><meta property="og:title" content="PiHole w/ DoH" />
 <meta property="og:description" content="Creating a PiHole VM w/ DoH to Cloudflare This is a brief guide on creating a new PiHole server that resolves DNS via Cloudflare over HTTPS. It is assumed that the audience already has a working knowledge of their vender specific network equipment and virtualization platform in addition to some experience with Ubuntu Linux.
@@ -17,8 +17,8 @@ Prep Work  Automatic Updates
 The entire reason I am building a PiHole server today is because I used a development copy of Ubuntu for the last one and I didn’t utilize automatic updates." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://owensresearch.org/posts/pihole-doh/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-06-18T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-06-18T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-06-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-18T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PiHole w/ DoH"/>
@@ -34,7 +34,7 @@ The entire reason I am building a PiHole server today is because I used a develo
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>PiHole w/ DoH</title>
-	<link rel="stylesheet" href="https://owensresearch.org/css/style.min.f74778e3020c87c304fb5982e09b92ba63a5c7f202996d4c7283d6057acfe9c1.css" integrity="sha256-90d44wIMh8ME+1mC4JuSumOlx/ICmW1McoPWBXrP6cE=" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://owensresearch.org/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous">
 	
 </head>
 
@@ -93,7 +93,7 @@ The entire reason I am building a PiHole server today is because I used a develo
 <li>Remove the <code>//</code> before <code>&quot;${distro_id}:${distro_codename}-updates&quot;;</code></li>
 <li><code>sudo nano /etc/apt/apt.conf.d/20auto-upgrades</code> and copy the below example:</li>
 </ol>
-<pre><code>APT::Periodic::Update-Package-Lists &quot;1&quot;;  
+<pre tabindex="0"><code>APT::Periodic::Update-Package-Lists &quot;1&quot;;  
 APT::Periodic::Download-Upgradeable-Packages &quot;1&quot;;  
 APT::Periodic::AutocleanInterval &quot;7&quot;;  
 APT::Periodic::Unattended-Upgrade &quot;1&quot;;  
@@ -135,7 +135,7 @@ APT::Periodic::Unattended-Upgrade &quot;1&quot;;
 			<footer class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Justin Owens</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>356 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-06-17 20:00 -0400</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-06-17 19:00 -0500</p>
 			</footer>
 		</article>
 		<div class="post-nav thin">

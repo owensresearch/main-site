@@ -13,7 +13,7 @@ date: 2021-04-27T20:00:36-04:00
 
 
 
-## OR-DE-FRA-01
+## Frankfurt, DE
 
 **FQDN:** de-fra01.owensresearch.org  
 **Bandwidth:** 1Gbps up/down  
@@ -23,7 +23,7 @@ date: 2021-04-27T20:00:36-04:00
 **Tunnel IPv4:** 172.21.99.137/32  
 **Tunnel IPv6:** fd42:4242:1099:179::137/128  
 
-## OR-AU-SYD-01
+## Sydney, AU
 
 **FQDN:** au-syd01.owensresearch.org  
 **Bandwidth:** 1Gbps up/down  
@@ -33,20 +33,16 @@ date: 2021-04-27T20:00:36-04:00
 **Tunnel IPv4:** 172.21.99.153/32  
 **Tunnel IPv6:** fd42:4242:1099:179::153/128  
 
+## Dallas, US
 
-## OR-US-EAST-01
-
-> New connections on this node will only be created with the IPv6 tunnel address.  Additionally, the wireguard interface on both sides will require MTU 1400 to be set.
-
-
-
-**FQDN:** us-east01.owensresearch.org  
+**FQDN:** us-dal01.owensresearch.org  
 **Bandwidth:** 1Gbps up/down  
-**Endpoint IPv6:** 2001:470:e03c:42::2  
+**Endpoint IPv4:** 144.202.64.27  
+**Endpoint IPv6:** 2001:19f0:6401:111d:5400:3ff:fea5:3729  
 **Endpoint Port:** 20000 + Last 4 of your ASN  
-**Tunnel IPv4:** 172.21.99.129/32  
-**Tunnel IPv6:** fd42:4242:1099:179::129/128  
-*MTU: 1400*  
+**Tunnel IPv4:** 172.21.99.143/32  
+**Tunnel IPv6:** fd42:4242:1099:179::143/128  
+
 
 # Routing Policy/Information
 
@@ -63,8 +59,8 @@ date: 2021-04-27T20:00:36-04:00
 ## Large Communities
 | Community | Description     |
 |-----------|-----------------|
-|4242421099:129:1  |  Imported @ Virginia, US PoP   |
-|4242421099:129:2  |  Originated @ Virginia, US PoP   |
+|4242421099:134:1  |  Imported @ Dallas, US PoP   |
+|4242421099:134:2  |  Originated @ Dallas, US PoP   |
 |4242421099:137:1  |  Imported @ Frankfurt, DE PoP  |
 |4242421099:137:2  |  Originated @ Frankfurt, DE PoP  |
 |4242421099:153:1  |  Imported @ Sydney, AU PoP  |
@@ -74,4 +70,4 @@ date: 2021-04-27T20:00:36-04:00
 ----
 
 
-> **Page Updated: May. 17, 2021**
+> **Page Updated: Oct. 30, 2021**

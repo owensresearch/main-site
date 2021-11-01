@@ -36,13 +36,14 @@ DN42: lg.owensresearch.dn42</description>
       <pubDate>Tue, 27 Apr 2021 20:00:36 -0400</pubDate>
       
       <guid>https://owensresearch.org/dn42-peering/</guid>
-      <description>AS4242421099  Please send an email to justin [at] owensresearch.org for peering. Due to limitations on my network, I try to avoid peering with link-local. By default I will use the below /128 ULA address. If you would like something different, please let me know.
+      <description>AS4242421099 Please send an email to justin [at] owensresearch.org for peering.
+I prefer to use Wireguard for all peerings.
+ Due to limitations on my network, I try to avoid peering with link-local. By default I will use the below /128 ULA address. If you would like something different, please let me know.
  Frankfurt, DE FQDN: de-fra01.owensresearch.org
 Bandwidth: 1Gbps up/down
 Endpoint IPv4: 95.179.250.248
 Endpoint IPv6: 2001:19f0:6c01:acd:5400:2ff:fed9:8aad
-Endpoint Port: 20000 + Last 4 of your ASN
-Tunnel IPv4: 172.</description>
+Endpoint Port: 20000 + Last 4 of your ASN</description>
     </item>
     
     <item>

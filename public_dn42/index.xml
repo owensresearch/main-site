@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Owens Research</title>
-    <link>https://owensresearch.dn42/</link>
+    <link>https://owensresearch.org/</link>
     <description>Recent content on Owens Research</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://owensresearch.dn42/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://owensresearch.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Projects</title>
-      <link>https://owensresearch.dn42/projects/</link>
+      <link>https://owensresearch.org/projects/</link>
       <pubDate>Tue, 27 Apr 2021 20:16:32 -0400</pubDate>
       
-      <guid>https://owensresearch.dn42/projects/</guid>
+      <guid>https://owensresearch.org/projects/</guid>
       <description>FlightAware
 Automatic Dependent Surveillance - Broadcast (ADS-B) will soon be required on all commercial airlines. Every community feeder/receiver counts. I am running my feeder on a setup known as PiAware (Built with a Raspberry Pi). https://flightaware.com/
 DN42
@@ -21,10 +21,10 @@ Decentralized Network 42 is an overlay network that allows members to establish 
     
     <item>
       <title>DN42 Services</title>
-      <link>https://owensresearch.dn42/dn42-services/</link>
+      <link>https://owensresearch.org/dn42-services/</link>
       <pubDate>Tue, 27 Apr 2021 20:12:30 -0400</pubDate>
       
-      <guid>https://owensresearch.dn42/dn42-services/</guid>
+      <guid>https://owensresearch.org/dn42-services/</guid>
       <description>Pingable  ping.owensresearch.dn42 pingable.owensresearch.dn42 172.21.99.132 fd42:4242:1099:c0de::1  The address is hosted locally on each of my nodes and anycasted. Feel free to use it for testing or automation.
 Looking Glass I host a looking glass at the below links. I want to give a big shout out to @checktheroads on Github for his awesome project. In my opinion, this is by far the best looking glass on Github.
 DN42: lg.owensresearch.dn42</description>
@@ -32,43 +32,44 @@ DN42: lg.owensresearch.dn42</description>
     
     <item>
       <title>DN42 Peering</title>
-      <link>https://owensresearch.dn42/dn42-peering/</link>
+      <link>https://owensresearch.org/dn42-peering/</link>
       <pubDate>Tue, 27 Apr 2021 20:00:36 -0400</pubDate>
       
-      <guid>https://owensresearch.dn42/dn42-peering/</guid>
-      <description>AS4242421099  Please send an email to justin [at] owensresearch.org for peering. Due to limitations on my network, I try to avoid peering with link-local. By default I will use the below /128 ULA address. If you would like something different, please let me know.
+      <guid>https://owensresearch.org/dn42-peering/</guid>
+      <description>AS4242421099 Please send an email to justin [at] owensresearch.org for peering.
+I prefer to use Wireguard for all peerings.
+ Due to limitations on my network, I try to avoid peering with link-local. By default I will use the below /128 ULA address. If you would like something different, please let me know.
  Frankfurt, DE FQDN: de-fra01.owensresearch.org
 Bandwidth: 1Gbps up/down
 Endpoint IPv4: 95.179.250.248
 Endpoint IPv6: 2001:19f0:6c01:acd:5400:2ff:fed9:8aad
-Endpoint Port: 20000 + Last 4 of your ASN
-Tunnel IPv4: 172.</description>
+Endpoint Port: 20000 + Last 4 of your ASN</description>
     </item>
     
     <item>
       <title>VMware Notes</title>
-      <link>https://owensresearch.dn42/posts/vmware-fw/</link>
+      <link>https://owensresearch.org/posts/vmware-fw/</link>
       <pubDate>Tue, 05 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://owensresearch.dn42/posts/vmware-fw/</guid>
+      <guid>https://owensresearch.org/posts/vmware-fw/</guid>
       <description>Adding Custom Ports to ESXi Host Firewall This post covers adding a custom syslog port but the concept can be applied for other needed firewall changes. By default syslog uses UDP port 514. However, most syslog servers and clients can easily be configured to use different ports. Because ports 0-1024 are system ports that sometimes require escalated rights to bind to, the most simple solution could be to use a custom port for syslog.</description>
     </item>
     
     <item>
       <title>Linux Notes</title>
-      <link>https://owensresearch.dn42/posts/linux/</link>
+      <link>https://owensresearch.org/posts/linux/</link>
       <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://owensresearch.dn42/posts/linux/</guid>
+      <guid>https://owensresearch.org/posts/linux/</guid>
       <description>SSH Key Based Login Setup SSH Keys  Use PuttyGen to generate public/private key pair. Copy the OpenSSH Public Key from the PuttyGen window (the save public key will not export in correct format). Paste the Public key into the file ~/home/.ssh/authorized_keys Export Private Key using the save button within PuttyGen (we need the .ppk file). Attach this Private Key to Putty.exe under Auth. Make sure you&amp;rsquo;re using username@x.x.x.x as the SSH target.</description>
     </item>
     
     <item>
       <title>PiHole w/ DoH</title>
-      <link>https://owensresearch.dn42/posts/pihole-doh/</link>
+      <link>https://owensresearch.org/posts/pihole-doh/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://owensresearch.dn42/posts/pihole-doh/</guid>
+      <guid>https://owensresearch.org/posts/pihole-doh/</guid>
       <description>Creating a PiHole VM w/ DoH to Cloudflare This is a brief guide on creating a new PiHole server that resolves DNS via Cloudflare over HTTPS. It is assumed that the audience already has a working knowledge of their vender specific network equipment and virtualization platform in addition to some experience with Ubuntu Linux.
 Prep Work  Automatic Updates
 The entire reason I am building a PiHole server today is because I used a development copy of Ubuntu for the last one and I didn’t utilize automatic updates.</description>
@@ -76,10 +77,10 @@ The entire reason I am building a PiHole server today is because I used a develo
     
     <item>
       <title>pfSense Notes</title>
-      <link>https://owensresearch.dn42/posts/pfsense/</link>
+      <link>https://owensresearch.org/posts/pfsense/</link>
       <pubDate>Fri, 29 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://owensresearch.dn42/posts/pfsense/</guid>
+      <guid>https://owensresearch.org/posts/pfsense/</guid>
       <description>MTU on LAGG If you have a LAGG to pfSense then chances are this is your trunk with all your vlans. Often there may be a situation when one of those vlan interfaces needs to have upgraded MTU size. Unlike other standalone interfaces, any LAGG members cannot change their MTU in the interfaces assignment area.
 Several posts from a few years back suggest it was a pretty big issue for awhile.</description>
     </item>

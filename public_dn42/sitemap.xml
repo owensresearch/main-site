@@ -2,35 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://owensresearch.dn42/projects/</loc>
+    <loc>https://owensresearch.org/projects/</loc>
     <lastmod>2021-04-27T20:16:32-04:00</lastmod>
   </url><url>
-    <loc>https://owensresearch.dn42/dn42-services/</loc>
+    <loc>https://owensresearch.org/dn42-services/</loc>
     <lastmod>2021-04-27T20:12:30-04:00</lastmod>
   </url><url>
-    <loc>https://owensresearch.dn42/dn42-peering/</loc>
+    <loc>https://owensresearch.org/dn42-peering/</loc>
     <lastmod>2021-04-27T20:00:36-04:00</lastmod>
   </url><url>
-    <loc>https://owensresearch.dn42/</loc>
+    <loc>https://owensresearch.org/</loc>
     <lastmod>2021-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://owensresearch.dn42/posts/</loc>
+    <loc>https://owensresearch.org/posts/</loc>
     <lastmod>2021-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://owensresearch.dn42/posts/vmware-fw/</loc>
+    <loc>https://owensresearch.org/posts/vmware-fw/</loc>
     <lastmod>2021-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://owensresearch.dn42/posts/linux/</loc>
+    <loc>https://owensresearch.org/posts/linux/</loc>
     <lastmod>2021-01-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://owensresearch.dn42/posts/pihole-doh/</loc>
+    <loc>https://owensresearch.org/posts/pihole-doh/</loc>
     <lastmod>2020-06-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://owensresearch.dn42/posts/pfsense/</loc>
+    <loc>https://owensresearch.org/posts/pfsense/</loc>
     <lastmod>2020-05-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://owensresearch.dn42/categories/</loc>
+    <loc>https://owensresearch.org/categories/</loc>
   </url><url>
-    <loc>https://owensresearch.dn42/tags/</loc>
+    <loc>https://owensresearch.org/tags/</loc>
   </url>
 </urlset>

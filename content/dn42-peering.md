@@ -7,9 +7,11 @@ date: 2021-04-27T20:00:36-04:00
 
 # AS4242421099
 
+Please send an email to justin [at] owensresearch.org for peering.
 
+I prefer to use Wireguard for all peerings.
 
-> Please send an email to justin [at] owensresearch.org for peering. Due to limitations on my network, I try to avoid peering with link-local.  By default I will use the below /128 ULA address.  If you would like something different, please let me know.
+> Due to limitations on my network, I try to avoid peering with link-local.  By default I will use the below /128 ULA address.  If you would like something different, please let me know.
 
 
 
@@ -44,11 +46,19 @@ date: 2021-04-27T20:00:36-04:00
 **Tunnel IPv6:** fd42:4242:1099:179::143/128  
 
 
-# Routing Policy/Information
+# Route Filtering
 
- - Accept all RPKI/ROA valid routes.  
- - Reject unknown and invalid routes.  
- - I am open to any experimental peering that may require an exception.  
+ - ROA checking is performed on import/export.
+ - ROA data is generated from the DN42 registry.
+ - Unknown and invalid address space is not permitted on AS4242421099.
+ 
+# Allowed Transit Traffic
+
+ - 10.0.0.0/8
+ - 172.20.0.0/14
+ - 172.31.0.0/16
+ - fd00::/8
+ 
 
 
 # Communities
@@ -70,4 +80,4 @@ date: 2021-04-27T20:00:36-04:00
 ----
 
 
-> **Page Updated: Oct. 30, 2021**
+> **Page Updated: Nov. 01, 2021**

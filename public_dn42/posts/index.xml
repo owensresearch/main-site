@@ -1,19 +1,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Posts on Owens Research</title>
-		<link>https://owensresearch.org/posts/</link>
+		<link>https://owensresearch.dn42/posts/</link>
 		<description>Recent content in Posts on Owens Research</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<lastBuildDate>Tue, 05 Jan 2021 00:00:00 +0000</lastBuildDate>
-		<atom:link href="https://owensresearch.org/posts/index.xml" rel="self" type="application/rss+xml" />
+		<atom:link href="https://owensresearch.dn42/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
 			<title>VMware Notes</title>
-			<link>https://owensresearch.org/posts/vmware-fw/</link>
+			<link>https://owensresearch.dn42/posts/vmware-fw/</link>
 			<pubDate>Tue, 05 Jan 2021 00:00:00 +0000</pubDate>
 			
-			<guid>https://owensresearch.org/posts/vmware-fw/</guid>
+			<guid>https://owensresearch.dn42/posts/vmware-fw/</guid>
 			<description>Adding Custom Ports to ESXi Host Firewall This post covers adding a custom syslog port but the concept can be applied for other needed firewall changes. By default syslog uses UDP port 514. However, most syslog servers and clients can easily be configured to use different ports. Because ports 0-1024 are system ports that sometimes require escalated rights to bind to, the most simple solution could be to use a custom port for syslog.</description>
 			<content type="html"><![CDATA[<h1 id="adding-custom-ports-to-esxi-host-firewall">Adding Custom Ports to ESXi Host Firewall</h1>
 <p>This post covers adding a custom syslog port but the concept can be applied for other needed firewall changes.  By default syslog uses UDP port 514.  However, most syslog servers and clients can easily be configured to use different ports.  Because ports 0-1024 are system ports that sometimes require escalated rights to bind to, the most simple solution could be to use a custom port for syslog.  The ESXi firewall by default allows common ports outbound such as 514, but probably will not allow a custom port.  This post was written using ESXi 6.7U3.</p>
@@ -68,10 +68,10 @@
 		
 		<item>
 			<title>Linux Notes</title>
-			<link>https://owensresearch.org/posts/linux/</link>
+			<link>https://owensresearch.dn42/posts/linux/</link>
 			<pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
 			
-			<guid>https://owensresearch.org/posts/linux/</guid>
+			<guid>https://owensresearch.dn42/posts/linux/</guid>
 			<description>SSH Key Based Login Setup SSH Keys  Use PuttyGen to generate public/private key pair. Copy the OpenSSH Public Key from the PuttyGen window (the save public key will not export in correct format). Paste the Public key into the file ~/home/.ssh/authorized_keys Export Private Key using the save button within PuttyGen (we need the .ppk file). Attach this Private Key to Putty.exe under Auth. Make sure you&amp;rsquo;re using username@x.x.x.x as the SSH target.</description>
 			<content type="html"><![CDATA[<h1 id="ssh-key-based-login">SSH Key Based Login</h1>
 <h2 id="setup-ssh-keys">Setup SSH Keys</h2>
@@ -120,10 +120,10 @@ ip route list
 		
 		<item>
 			<title>PiHole w/ DoH</title>
-			<link>https://owensresearch.org/posts/pihole-doh/</link>
+			<link>https://owensresearch.dn42/posts/pihole-doh/</link>
 			<pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://owensresearch.org/posts/pihole-doh/</guid>
+			<guid>https://owensresearch.dn42/posts/pihole-doh/</guid>
 			<description>Creating a PiHole VM w/ DoH to Cloudflare This is a brief guide on creating a new PiHole server that resolves DNS via Cloudflare over HTTPS. It is assumed that the audience already has a working knowledge of their vender specific network equipment and virtualization platform in addition to some experience with Ubuntu Linux.
 Prep Work  Automatic Updates
 The entire reason I am building a PiHole server today is because I used a development copy of Ubuntu for the last one and I didn’t utilize automatic updates.</description>
@@ -184,10 +184,10 @@ APT::Periodic::Unattended-Upgrade &quot;1&quot;;
 		
 		<item>
 			<title>pfSense Notes</title>
-			<link>https://owensresearch.org/posts/pfsense/</link>
+			<link>https://owensresearch.dn42/posts/pfsense/</link>
 			<pubDate>Fri, 29 May 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://owensresearch.org/posts/pfsense/</guid>
+			<guid>https://owensresearch.dn42/posts/pfsense/</guid>
 			<description>MTU on LAGG If you have a LAGG to pfSense then chances are this is your trunk with all your vlans. Often there may be a situation when one of those vlan interfaces needs to have upgraded MTU size. Unlike other standalone interfaces, any LAGG members cannot change their MTU in the interfaces assignment area.
 Several posts from a few years back suggest it was a pretty big issue for awhile.</description>
 			<content type="html"><![CDATA[<h2 id="mtu-on-lagg">MTU on LAGG</h2>
